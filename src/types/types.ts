@@ -40,14 +40,7 @@ export interface wrestlerBaseInfo {
 };
 
 export interface matchResults {
-  [key: string]: { // day1, day2...
-    winner: string;
-    loser: string;
-    technique: string;
-    winnerRank: string;
-    loserRank: string;
-    recordSoFar: string;
-  }
+  [key: string]: match // day1, day2... : match 
 };
 
 export interface match {
@@ -66,12 +59,14 @@ export interface tournamentMap {
 }
 
 export interface tournamentMetadataMap {
-  [key: string]: {// january_2019, ... 
-    name: string;
-    tournamentRank: string;
-    wins: number;
-    losses: number;
-  }
+  [key: string]: tournamentMetadata // january_2019, ... : tournamentMetadata
+}
+
+export interface tournamentMetadata {
+  name: string;
+  tournamentRank: string;
+  wins: number;
+  losses: number;
 }
 
 // app pages

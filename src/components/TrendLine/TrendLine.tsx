@@ -1,16 +1,11 @@
 import React from 'react';
 import * as d3 from 'd3';
 import { 
-  wrestlerMap, 
-  wrestlerBaseInfo, 
-  matchResults,
   match,
   lineGenerator,
-  tournamentMap,
-  tournamentMetadataMap
-} from '../types/types';
+} from '../../types/types';
 
-import '../styles/TrendLine.css';
+import './TrendLine.css';
 
 interface Props {
   tournamentData: {
@@ -53,7 +48,6 @@ class TrendLine extends React.Component<Props, object> {
         }
       }
     }).filter(d => {
-      console.log('d: ', d);
       return !d.filterThisOut;
     });
     

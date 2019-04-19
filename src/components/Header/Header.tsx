@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import '../styles/Header.css';
+import './Header.css';
 
 interface Props {
   goToWrestlerList: () => void

@@ -7,9 +7,9 @@ import {
   rawWrestlerObj,
   rawTournamentMap,
 } from './types/types';
-import Header from './components/Header';
-import WrestlerList from './components/WrestlerList';
-import WrestlerDetail from './components/WrestlerDetail';
+import Header from './components/Header/Header';
+import WrestlerList from './components/WrestlerList/WrestlerList';
+import WrestlerDetail from './components/WrestlerDetail/WrestlerDetail';
 
 // write api later for loading this data...
 import july_2018_day1 from './hardCodedData/2018/july_2018/day1.json';

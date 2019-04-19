@@ -1,3 +1,11 @@
+.tournamentSection {
+  border: 2px solid #000;
+  border-radius: 4px;
+  width: 350px;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
 .tournamentTitle {
   font-weight: bold;
   font-size: 18px;
@@ -38,29 +46,6 @@
   cursor: default;
 }
 
-.tournamentSection {
-  border: 2px solid #000;
-  border-radius: 4px;
-  width: 350px;
-  height: 100%;
-  margin-bottom: 20px;
-}
-
-.tournamentResults {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 20px;
-}
-
-.dayAndResult {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start; 
-  margin: 0 0 10px 10px;
-}
-
 .matchResult, .dayName {
   font-size: 12px;
 }
@@ -68,4 +53,10 @@
 .dayName {
   font-weight: 700;
   margin-right: 10px;
+}
+.dayResultRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; 
+  margin: 0 0 10px 10px;
 }

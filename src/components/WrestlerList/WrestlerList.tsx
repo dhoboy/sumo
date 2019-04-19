@@ -5,7 +5,7 @@ import {
   wrestlerMap,
   rawWrestlerObj,
   rawTournamentMap,
-} from '../types/types';
+} from '../../types/types';
 
 interface Props {
   wrestlers: wrestlerMap,
