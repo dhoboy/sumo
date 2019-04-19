@@ -1,0 +1,71 @@
+.tournamentTitle {
+  font-weight: bold;
+  font-size: 18px;
+  padding: 15px 15px 0px 15px;
+  cursor: default;
+}
+
+.winsLosses {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 3px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: default;
+}
+
+.wins {
+  margin-right: 5px;
+}
+
+.losses {
+  margin-left: 5px;
+}
+
+.winsLosses.kachi-koshi-tournament, .kachi-koshi {
+  color: #33a02c;
+}
+
+.winsLosses.machi-koshi-tournament, .machi-koshi {
+  color: saddlebrown;
+}
+
+.kachi-koshi, .machi-koshi {
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin-top: 3px;
+  cursor: default;
+}
+
+.tournamentSection {
+  border: 2px solid #000;
+  border-radius: 4px;
+  width: 350px;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.tournamentResults {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.dayAndResult {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; 
+  margin: 0 0 10px 10px;
+}
+
+.matchResult, .dayName {
+  font-size: 12px;
+}
+
+.dayName {
+  font-weight: 700;
+  margin-right: 10px;
+}
