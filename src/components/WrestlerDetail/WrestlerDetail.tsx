@@ -4,10 +4,12 @@ import {
   wrestlerBaseInfo, 
   matchResults,
   tournamentMap,
+  matchups,
   tournamentMetadataMap
 } from '../../types/types';
 
 import TournamentResultCard from '../TournamentResultCard/TournamentResultCard';
+import WrestlerMatchups from '../WrestlerMatchups/WrestlerMatchups';
 import './WrestlerDetail.css';
 
 interface Props {
@@ -56,17 +58,23 @@ class WrestlerDetail extends React.Component<Props, object> {
     )
   }
 
-  drawMatchupStats() {
+  drawMatchupStats(wrestlerName: string, matchups: matchups) {
+    console.log("matchups!: ", matchups);
     return (
-      <div>
-        Matchup Stats go here
-      </div>
+      <WrestlerMatchups
+        wrestlerName={wrestlerName}
+        matchups={matchups}
+      />
     );
   }
 
   drawTournamentStats(wrestlerName: string, 
       tournaments: tournamentMap, 
       tournamentsMetadata: tournamentMetadataMap) {
+
+    console.log("wrestlerName: ", wrestlerName);
+    console.log("tournaments: ", tournaments);
+    console.log("tournamentsMetadata: ", tournamentsMetadata);
     
     return (
       <div className="tournamentResults">
@@ -117,8 +125,10 @@ class WrestlerDetail extends React.Component<Props, object> {
     // massage results into tournament bins
     let tournaments: tournamentMap = {};
     let tournamentsMetadata: tournamentMetadataMap = {};
+    let matchups: matchups = {};
 
     wrestlerData.results.forEach(tournamentObj => {
+      console.log("tournamentObj: ", tournamentObj);
       let tournamentNameParts = Object.keys(tournamentObj)[0].split("_");
       let tournamentName = tournamentNameParts.slice(0,2).join("_");
       let tournamentDay = tournamentNameParts.slice(2)[0];
@@ -129,11 +139,19 @@ class WrestlerDetail extends React.Component<Props, object> {
 
       // track the tournamnet metadata for this wrestler
       let winner = Object.values(tournamentObj)[0].winner === wrestlerName; 
-      let tournamentRank = "";
+      let opponent = "";
+      let opponentRank = "";
+
+      let tournamentRank: string = "";
+      
       if (winner) {
         tournamentRank = Object.values(tournamentObj)[0].winnerRank;
+        opponent = Object.values(tournamentObj)[0].loser;
+        opponentRank = Object.values(tournamentObj)[0].loserRank;
       } else {
         tournamentRank = Object.values(tournamentObj)[0].loserRank;
+        opponent = Object.values(tournamentObj)[0].winner;
+        opponentRank = Object.values(tournamentObj)[0].winnerRank;
       }
 
       if (!tournamentsMetadata[tournamentName]) {
@@ -150,11 +168,37 @@ class WrestlerDetail extends React.Component<Props, object> {
       } else {
         tournamentsMetadata[tournamentName].losses += 1;
       }
+
+      // initialize match up for this opponent 
+      if (!matchups[opponent]) {
+        matchups[opponent] = {
+          results: [{
+            tournament: tournamentName,
+            day: tournamentDay,
+            result: winner ? "win" : "lose",
+            opponent: opponent,
+            opponentRank: opponentRank
+          }],
+          totalWins: winner ? 1 : 0,
+          totalLosses: !winner ? 1 : 0
+        }
+      } else { // add to matchups for this opponent
+        matchups[opponent].totalWins = winner ? matchups[opponent].totalWins + 1 : matchups[opponent].totalWins; 
+        matchups[opponent].totalLosses = !winner ? matchups[opponent].totalLosses + 1 : matchups[opponent].totalLosses; 
+        matchups[opponent].results = matchups[opponent].results.concat({
+          tournament: tournamentName,
+          day: tournamentDay,
+          result: winner ? "win" : "lose",
+          opponent: opponent,
+          opponentRank: opponentRank
+        });
+      }
     });
 
     return {
       tournaments,
-      tournamentsMetadata
+      tournamentsMetadata,
+      matchups
     };
   }
   
@@ -166,14 +210,15 @@ class WrestlerDetail extends React.Component<Props, object> {
 
     const {
       tournaments,
-      tournamentsMetadata
+      tournamentsMetadata,
+      matchups
     } = this.formData();
     
     return (
       <div id={`${wrestlerName}`} className="wrestlerDetailPage">
         {this.drawDetailHeader()}
         {this.drawTournamentStats(wrestlerName, tournaments, tournamentsMetadata)}
-        {this.drawMatchupStats()}
+        {this.drawMatchupStats(wrestlerName, matchups)}
       </div>
     );
   }

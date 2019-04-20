@@ -120,7 +120,6 @@ class App extends Component {
   }
 
   goToWrestlerDetailPage(wrestlerName: string) {
-    console.log("wrestlerName: ", wrestlerName);
     this.setState({
       wrestlerDetailPage: wrestlerName,
       page: "wrestlerDetail"
@@ -231,9 +230,6 @@ class App extends Component {
     };
 
     Object.keys(tournamentData).forEach(day => {
-      console.log('day: ', day);
-      console.log("tournamentData[day]: ", tournamentData[day]);
-      
       // used for determining rank in most recent tournament
       const tournamentDate = new Date(day.split("_").slice(0,2).join(" "));
       const today = Date.now();
@@ -323,7 +319,6 @@ class App extends Component {
       });
     });
 
-    console.log("wrestlers: ", wrestlers);
     this.setState({
       wrestlers
     });
@@ -334,7 +329,6 @@ class App extends Component {
   // }
 
   render() {
-    console.log("this.state: ", this.state);
     let component = null;
     switch (this.state.page) {
       case "wrestlerList":

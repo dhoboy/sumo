@@ -69,6 +69,20 @@ export interface tournamentMetadata {
   losses: number;
 }
 
+export interface matchups {
+  [key: string]: { // opponent name
+    results: { 
+      tournament: string; // july_2018, ...
+      day: string; // day1, ...
+      result: string; // win or loose
+      opponent: string;
+      opponentRank: string;
+    }[];
+    totalWins: number;
+    totalLosses: number;
+  }
+}
+
 // app pages
 export type page = "WrestlerList" | "WrestlerDetail";
 
