@@ -5,9 +5,11 @@ import {
   matchResults,
   tournamentMap,
   matchups,
-  tournamentMetadataMap
+  tournamentMetadataMap,
+  techniques
 } from '../../types/types';
 
+import WrestlerDetailHeader from './subcomponents/WrestlerDetailHeader';
 import TournamentResultCard from '../TournamentResultCard/TournamentResultCard';
 import WrestlerMatchups from '../WrestlerMatchups/WrestlerMatchups';
 import './WrestlerDetail.css';
@@ -18,11 +20,7 @@ interface Props {
 }
 
 /* ADD */
-// section of wrestler's all time numbers against each other wrestler
-
 // line graph of every match by wrestler in top header beside name
-
-// maybe these are three columns...
 
 // filter by sumo rank on list page
 
@@ -31,14 +29,13 @@ interface Props {
 // 2 columns. one is double wide of tournmanet results
 // other column is how you match up against everybody else all time
 
-// in header beside their name, put how frequently then win by certain moves
-// like, wins by over arm throw 80% of time
-// who they loose to or who they beat a lot, or what rank they loose to a lot stuff like that
+// who they loose to or who they beat a lot, 
+// or what rank they loose to a lot stuff like that
 
 // color code rank from the pyramid of rank on nhk sumo site
 
 class WrestlerDetail extends React.Component<Props, object> {
-  drawDetailHeader() {
+  drawDetailHeader(techniques: techniques) {
     let {
       wrestlerName,
       wrestlers
@@ -47,14 +44,12 @@ class WrestlerDetail extends React.Component<Props, object> {
     let wrestlerData = wrestlers[wrestlerName];
 
     return (
-      <div>
-        <div>{wrestlerName}</div>
-        <img src={`https://www3.nhk.or.jp${wrestlerData.image}`} />
-        <div>
-          <img src={`https://www3.nhk.or.jp${wrestlerData.name_ja}`} />
-        </div>
-      </div>
-    )
+      <WrestlerDetailHeader 
+        techniques={techniques}
+        wrestlerName={wrestlerName}
+        wrestlerData={wrestlerData}
+      />
+    );
   }
 
   drawMatchupStats(wrestlerName: string, matchups: matchups) {
@@ -128,10 +123,11 @@ class WrestlerDetail extends React.Component<Props, object> {
     let wrestlerData = wrestlers[wrestlerName];
     console.log("wrestlerData: ", wrestlerData);
 
-    // massage results into tournament bins
+    // massage results into bins
     let tournaments: tournamentMap = {};
     let tournamentsMetadata: tournamentMetadataMap = {};
     let matchups: matchups = {};
+    let techniques: techniques = {};
 
     wrestlerData.results.forEach(tournamentObj => {
       console.log("tournamentObj: ", tournamentObj);
@@ -144,11 +140,11 @@ class WrestlerDetail extends React.Component<Props, object> {
       tournaments[tournamentName][tournamentDay] = Object.values(tournamentObj)[0];
 
       // track the tournamnet metadata for this wrestler
-      let winner = Object.values(tournamentObj)[0].winner === wrestlerName; 
-      let opponent = "";
-      let opponentRank = "";
-
+      let winner: boolean = Object.values(tournamentObj)[0].winner === wrestlerName; 
+      let opponent: string = "";
+      let opponentRank: string = "";
       let tournamentRank: string = "";
+      let technique: string = Object.values(tournamentObj)[0].technique;
       
       if (winner) {
         tournamentRank = Object.values(tournamentObj)[0].winnerRank;
@@ -175,15 +171,16 @@ class WrestlerDetail extends React.Component<Props, object> {
         tournamentsMetadata[tournamentName].losses += 1;
       }
 
-      // initialize match up for this opponent 
+      // initialize matchup for this opponent 
       if (!matchups[opponent]) {
         matchups[opponent] = {
           results: [{
             tournament: tournamentName,
             day: tournamentDay,
-            result: winner ? "won" : "lost",
+            result: winner ? "Won" : "Lost",
             opponent: opponent,
-            opponentRank: opponentRank
+            opponentRank: opponentRank,
+            technique: technique
           }],
           totalWins: winner ? 1 : 0,
           totalLosses: !winner ? 1 : 0
@@ -194,17 +191,30 @@ class WrestlerDetail extends React.Component<Props, object> {
         matchups[opponent].results = matchups[opponent].results.concat({
           tournament: tournamentName,
           day: tournamentDay,
-          result: winner ? "won" : "lost",
+          result: winner ? "Won" : "Lost",
           opponent: opponent,
-          opponentRank: opponentRank
+          opponentRank: opponentRank,
+          technique: Object.values(tournamentObj)[0].technique
         });
+      }
+
+      // tracking moves won/lost by
+      if (!techniques[technique]) {
+        techniques[technique] = {
+          winsBy: winner ? 1 : 0,
+          lossesBy: !winner ? 1 : 0
+        };
+      } else {
+        techniques[technique].winsBy += winner ? 1 : 0;
+        techniques[technique].lossesBy += !winner ? 1 : 0;
       }
     });
 
     return {
       tournaments,
       tournamentsMetadata,
-      matchups
+      matchups,
+      techniques
     };
   }
   
@@ -217,12 +227,13 @@ class WrestlerDetail extends React.Component<Props, object> {
     const {
       tournaments,
       tournamentsMetadata,
-      matchups
+      matchups,
+      techniques
     } = this.formData();
     
     return (
       <div id={`${wrestlerName}`} className="wrestlerDetailPage">
-        {this.drawDetailHeader()}
+        {this.drawDetailHeader(techniques)}
         <div className="wrestlerDetailBody">
           {this.drawTournamentStats(wrestlerName, tournaments, tournamentsMetadata)}
           {this.drawMatchupStats(wrestlerName, matchups)}

@@ -19,10 +19,13 @@ class Header extends Component<Props, object> {
 }
 
 const headerStyle = {
-  "fontSize": "24px",
-  "margin": "10px 0",
+  "fontSize": "35px",
+  "margin": "10px 0 20px 0",
+  "paddingBottom": "10px",
   "fontWeight": 700,
-  "cursor": "pointer"
+  "cursor": "pointer",
+  "text-align": "center",
+  "border-bottom": "2px solid #e40000"
 };
 
 export default Header;

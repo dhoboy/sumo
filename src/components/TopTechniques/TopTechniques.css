@@ -1,0 +1,37 @@
+.topTechniquesSection {
+  display: flex;
+}
+
+.winsSection, .lossesSection {
+  width: 200px;
+}
+
+.winsSection {
+  margin-right: 20px;
+}
+
+.totalWins, .totalLosses {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.totalWinsLabel, .totalLossesLabel {
+  margin-right: 5px;
+}
+
+.topTechniques {
+  margin-top: 10px;
+}
+
+.topTechnique {
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.topWinningTechniquesTitle, .topLoosingTechniquesTitle {
+  font-size: 18px;
+  border-bottom: 2px solid #000;
+  letter-spacing: 1.5px;
+}

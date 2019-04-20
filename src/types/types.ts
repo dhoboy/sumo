@@ -77,10 +77,18 @@ export interface matchups {
       result: string; // win or loose
       opponent: string;
       opponentRank: string;
+      technique: string;
     }[];
     totalWins: number;
     totalLosses: number;
   }
+}
+
+export interface techniques {
+  [key: string]: { // technique name
+    winsBy: number;
+    lossesBy: number;
+  };
 }
 
 // app pages

@@ -1,11 +1,46 @@
+#wrestlerDetailHeader {
+  display: flex;
+  flex-direction: row;
+}
+
+.wrestlerNameAndPhoto {
+  width: 200px;
+  text-align: center;
+}
+
+.wrestlerEnglishName {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.wrestlerJapaneseName {
+  height: 47px;
+  width: 100%;
+  margin: auto;
+  display: none;
+}
+
+.wrestlerJapaneseNameImgContainer {
+  height: 100%;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: inherit;
+  background-size: 175px auto;
+}
+
+.wrestlerPhoto {
+  border: 2px solid #000;
+  border-radius: 90px;
+}
+
 .wrestlerDetailBody {
   display: flex;
   margin: 30px;
 }
 
 .tournamentResultsSection {
-  width: 60%;
   height: 100%;
+  text-align: center;
 }
 
 .tournamentResultsTitle {

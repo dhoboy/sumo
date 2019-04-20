@@ -26,7 +26,7 @@ class WrestlerMatchups extends React.Component<Props, object> {
   drawInputBox() {
     return (
       <div>
-        <div>Filter by Wrestler Name: </div>
+        <div className="matchupsFilterHelpText">Filter by Wrestler Name: </div>
         <input 
           className="matchupsFilterInput"
           type="text"
@@ -71,16 +71,26 @@ class WrestlerMatchups extends React.Component<Props, object> {
               <th>Day</th>
               <th>Opponent Rank</th>
               <th>Result</th>
+              <th>Technique</th>
             </tr>
           </thead>
           <tbody>
-            {opponentMatchupData.results.map(d => {
+            {opponentMatchupData.results.sort((a, b) => {
+              let aDate = new Date(a.tournament.split("_").join(" "));
+              let bDate = new Date(b.tournament.split("_").join(" "));
+              return Number(bDate) - Number(aDate);
+            }).map(d => {
+              let tournamentNameParts: string[] = d.tournament.split("_");
+              let displayTournamentName = tournamentNameParts[0].charAt(0).toUpperCase() + 
+                tournamentNameParts[0].slice(1) + " " + tournamentNameParts[1];
+
               return (
                 <tr>
-                  <td>{d.tournament}</td>
-                  <td>{d.day}</td>
+                  <td>{displayTournamentName}</td>
+                  <td>{d.day.slice(3)}</td>
                   <td>{d.opponentRank}</td>
                   <td>{d.result}</td>
+                  <td>{d.technique}</td>
                 </tr>
               );
             })}
