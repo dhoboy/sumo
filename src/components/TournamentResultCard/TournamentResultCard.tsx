@@ -42,6 +42,7 @@ const TournamentResultCard: React.FunctionComponent<Props> = ({
         tournamentData={tournamentData} 
         wrestlerName={wrestlerName}
         tournamentMetadata={tournamentMetadata}
+        pageLocation={'resultCard'}
       />
       <div className="tournamentDayResults">
         {Object.keys(tournamentData).map(day => {

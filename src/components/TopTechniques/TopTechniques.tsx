@@ -14,8 +14,6 @@ class TopTechniques extends React.Component<Props, object> {
       techniques
     } = this.props;
 
-    console.log("techniques: ", techniques);
-
     let totalWins: number = 0;
     let totalLosses: number = 0;
 
@@ -42,11 +40,6 @@ class TopTechniques extends React.Component<Props, object> {
         lossPercentage: techniques[technique].lossesBy / totalLosses
       }
     });
-
-    console.log("topWinningTechniques: ", topWinningTechniques);
-    console.log("topLoosingTechniques: ", topLoosingTechniques);
-    console.log("techniques total wins: ", totalWins);
-    console.log("techniques total losses: ", totalLosses);
 
     return (
       <div className="topTechniquesSection">

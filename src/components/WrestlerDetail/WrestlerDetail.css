@@ -1,6 +1,25 @@
 #wrestlerDetailHeader {
+  
+}
+
+.wrestlerDetailHeaderInfo {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+}
+
+.wrestlerDetailHeaderGraphs {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+.wrestlerDetailHeaderGraphAndLabel {
+  text-align: center;
+}
+
+.wrestlerDetailHeaderGraphLabel {
+  font-size: 12px;
 }
 
 .wrestlerNameAndPhoto {

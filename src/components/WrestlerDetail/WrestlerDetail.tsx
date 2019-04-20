@@ -35,7 +35,10 @@ interface Props {
 // color code rank from the pyramid of rank on nhk sumo site
 
 class WrestlerDetail extends React.Component<Props, object> {
-  drawDetailHeader(techniques: techniques) {
+  drawDetailHeader(techniques: techniques, 
+      tournaments: tournamentMap, 
+      tournamentsMetadata: tournamentMetadataMap) {
+    
     let {
       wrestlerName,
       wrestlers
@@ -48,12 +51,13 @@ class WrestlerDetail extends React.Component<Props, object> {
         techniques={techniques}
         wrestlerName={wrestlerName}
         wrestlerData={wrestlerData}
+        tournaments={tournaments}
+        tournamentsMetadata={tournamentsMetadata}
       />
     );
   }
 
   drawMatchupStats(wrestlerName: string, matchups: matchups) {
-    console.log("matchups!: ", matchups);
     return (
       <WrestlerMatchups
         wrestlerName={wrestlerName}
@@ -65,10 +69,6 @@ class WrestlerDetail extends React.Component<Props, object> {
   drawTournamentStats(wrestlerName: string, 
       tournaments: tournamentMap, 
       tournamentsMetadata: tournamentMetadataMap) {
-
-    console.log("wrestlerName: ", wrestlerName);
-    console.log("tournaments: ", tournaments);
-    console.log("tournamentsMetadata: ", tournamentsMetadata);
     
     return (
       <div className="tournamentResultsSection">
@@ -121,7 +121,6 @@ class WrestlerDetail extends React.Component<Props, object> {
     } = this.props;
 
     let wrestlerData = wrestlers[wrestlerName];
-    console.log("wrestlerData: ", wrestlerData);
 
     // massage results into bins
     let tournaments: tournamentMap = {};
@@ -130,7 +129,6 @@ class WrestlerDetail extends React.Component<Props, object> {
     let techniques: techniques = {};
 
     wrestlerData.results.forEach(tournamentObj => {
-      console.log("tournamentObj: ", tournamentObj);
       let tournamentNameParts = Object.keys(tournamentObj)[0].split("_");
       let tournamentName = tournamentNameParts.slice(0,2).join("_");
       let tournamentDay = tournamentNameParts.slice(2)[0];
@@ -233,7 +231,7 @@ class WrestlerDetail extends React.Component<Props, object> {
     
     return (
       <div id={`${wrestlerName}`} className="wrestlerDetailPage">
-        {this.drawDetailHeader(techniques)}
+        {this.drawDetailHeader(techniques, tournaments, tournamentsMetadata)}
         <div className="wrestlerDetailBody">
           {this.drawTournamentStats(wrestlerName, tournaments, tournamentsMetadata)}
           {this.drawMatchupStats(wrestlerName, matchups)}

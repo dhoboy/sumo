@@ -31,7 +31,6 @@ class WrestlerMatchups extends React.Component<Props, object> {
           className="matchupsFilterInput"
           type="text"
           onChange={(e) => {
-            console.log("e: ", e.target.value);
             this.setState({
               text: e.target.value
             });
@@ -106,18 +105,12 @@ class WrestlerMatchups extends React.Component<Props, object> {
       matchups
     } = this.props;
 
-    console.log("matchups in matchups component: ", matchups);
-    console.log("matchups text: ", this.state.text);
-
-
     return (
       <div className="wrestlerMatchupsSection">
         {this.drawHeader()}
         {this.drawInputBox()}
         <div className="wrestlerMatchups">
           {Object.keys(matchups).filter(opponent => {
-            console.log("opponent: ", opponent);
-            console.log("opponent.indexOf(this.state.text): ", opponent.indexOf(this.state.text));
             return opponent.toLowerCase().indexOf(this.state.text.toLowerCase()) > -1;
           }).map(opponent => {
             return this.drawMatchup(opponent);

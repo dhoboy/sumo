@@ -16,7 +16,8 @@ interface Props {
     wins: number;
     losses: number;
     name: string;
-  }
+  };
+  pageLocation: string;
 }
 
 class TrendLine extends React.Component<Props, object> {
@@ -24,10 +25,11 @@ class TrendLine extends React.Component<Props, object> {
     const { 
       tournamentData,
       wrestlerName,
-      tournamentMetadata
+      tournamentMetadata,
+      pageLocation
     } = this.props;
 
-    let g = d3.select(`.${tournamentMetadata.name}`)
+    let g = d3.select(`.${tournamentMetadata.name}-${pageLocation}`)
       .append("g")
       .attr("transform", `translate(${10}, ${10})`);
 
@@ -74,12 +76,13 @@ class TrendLine extends React.Component<Props, object> {
   render() {
     const { 
       tournamentData,
-      tournamentMetadata
+      tournamentMetadata,
+      pageLocation
     } = this.props;
 
     return (
       <div>
-        <svg className={`${tournamentMetadata.name}`}
+        <svg className={`${tournamentMetadata.name}-${pageLocation}`}
           height="50" width="150">
         </svg>
       </div>
