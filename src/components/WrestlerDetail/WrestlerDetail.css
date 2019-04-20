@@ -1,7 +1,25 @@
+.wrestlerDetailBody {
+  display: flex;
+  margin: 30px;
+}
+
+.tournamentResultsSection {
+  width: 60%;
+  height: 100%;
+}
+
+.tournamentResultsTitle {
+  font-size: 24px; 
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
 .tournamentResults {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 20px;
+  height: 100%;
 }

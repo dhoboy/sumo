@@ -53,7 +53,6 @@ class WrestlerDetail extends React.Component<Props, object> {
         <div>
           <img src={`https://www3.nhk.or.jp${wrestlerData.name_ja}`} />
         </div>
-        <div>Match Results</div>
       </div>
     )
   }
@@ -77,38 +76,45 @@ class WrestlerDetail extends React.Component<Props, object> {
     console.log("tournamentsMetadata: ", tournamentsMetadata);
     
     return (
-      <div className="tournamentResults">
-        {Object.keys(tournaments).map(tournament => {
-          let tournamentData = tournaments[tournament];
-          let tournamentMetadata = tournamentsMetadata[tournament];
-          let wins = tournamentMetadata.wins;
-          let losses = tournamentMetadata.losses;
-          let tournamentDisplayNameParts = tournament.split("_");
-          let tournamentDisplayName = tournamentDisplayNameParts[0].charAt(0).toUpperCase() + 
-            tournamentDisplayNameParts[0].slice(1) + " " +
-            tournamentDisplayNameParts[1];
-          let tournamentType: string = "";
+      <div className="tournamentResultsSection">
+        <div className="tournamentResultsTitle">Tournament Results</div>
+        <div className="tournamentResults">
+          {Object.keys(tournaments).sort((a, b) => {
+            let aDate = new Date(a.split("_").join(" "));
+            let bDate = new Date(b.split("_").join(" "));
+            return Number(bDate) - Number(aDate);
+          }).map(tournament => {
+            let tournamentData = tournaments[tournament];
+            let tournamentMetadata = tournamentsMetadata[tournament];
+            let wins = tournamentMetadata.wins;
+            let losses = tournamentMetadata.losses;
+            let tournamentDisplayNameParts = tournament.split("_");
+            let tournamentDisplayName = tournamentDisplayNameParts[0].charAt(0).toUpperCase() + 
+              tournamentDisplayNameParts[0].slice(1) + " " +
+              tournamentDisplayNameParts[1];
+            let tournamentType: string = "";
 
-          if (wins > losses) {
-            tournamentType = "kachi-koshi";
-          } else if (losses > wins) {
-            tournamentType = "machi-koshi";
-          } else {
-            tournamentType = "";
-          }
+            if (wins > losses) {
+              tournamentType = "kachi-koshi";
+            } else if (losses > wins) {
+              tournamentType = "machi-koshi";
+            } else {
+              tournamentType = "";
+            }
 
-          return (
-            <TournamentResultCard
-              tournamentData={tournamentData}
-              tournamentMetadata={tournamentMetadata}
-              wins={wins}
-              losses={losses}
-              tournamentDisplayName={tournamentDisplayName}
-              tournamentType={tournamentType}
-              wrestlerName={wrestlerName}
-            />
-          );   
-        })}
+            return (
+              <TournamentResultCard
+                tournamentData={tournamentData}
+                tournamentMetadata={tournamentMetadata}
+                wins={wins}
+                losses={losses}
+                tournamentDisplayName={tournamentDisplayName}
+                tournamentType={tournamentType}
+                wrestlerName={wrestlerName}
+              />
+            );   
+          })}
+        </div>
       </div>
     );
   }
@@ -175,7 +181,7 @@ class WrestlerDetail extends React.Component<Props, object> {
           results: [{
             tournament: tournamentName,
             day: tournamentDay,
-            result: winner ? "win" : "lose",
+            result: winner ? "won" : "lost",
             opponent: opponent,
             opponentRank: opponentRank
           }],
@@ -188,7 +194,7 @@ class WrestlerDetail extends React.Component<Props, object> {
         matchups[opponent].results = matchups[opponent].results.concat({
           tournament: tournamentName,
           day: tournamentDay,
-          result: winner ? "win" : "lose",
+          result: winner ? "won" : "lost",
           opponent: opponent,
           opponentRank: opponentRank
         });
@@ -217,8 +223,10 @@ class WrestlerDetail extends React.Component<Props, object> {
     return (
       <div id={`${wrestlerName}`} className="wrestlerDetailPage">
         {this.drawDetailHeader()}
-        {this.drawTournamentStats(wrestlerName, tournaments, tournamentsMetadata)}
-        {this.drawMatchupStats(wrestlerName, matchups)}
+        <div className="wrestlerDetailBody">
+          {this.drawTournamentStats(wrestlerName, tournaments, tournamentsMetadata)}
+          {this.drawMatchupStats(wrestlerName, matchups)}
+        </div>
       </div>
     );
   }
