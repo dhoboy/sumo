@@ -14,6 +14,22 @@
   cursor: default;
 }
 
+.trendLineContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.trendLineKeys {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.trendLineKey {
+  font-size: 10px;
+}
+
 .winsLosses {
   display: flex;
   flex-direction: row;

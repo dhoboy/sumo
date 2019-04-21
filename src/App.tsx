@@ -5,6 +5,10 @@ import {
   wrestlerBaseInfo,
   wrestlerMap,
   rawWrestlerObj,
+  matchups,
+  techniques,
+  tournamentMap,
+  tournamentMetadataMap,
   rawTournamentMap,
 } from './types/types';
 import Header from './components/Header/Header';
@@ -324,6 +328,104 @@ class App extends Component {
     });
   }
 
+  formData(wrestlerName: string) {
+    let wrestlers: wrestlerMap = this.state.wrestlers;
+    let wrestlerData: wrestlerBaseInfo = wrestlers[wrestlerName];
+
+    // massage results into bins
+    let tournaments: tournamentMap = {};
+    let tournamentsMetadata: tournamentMetadataMap = {};
+    let matchups: matchups = {};
+    let techniques: techniques = {};
+
+    wrestlerData.results.forEach(tournamentObj => {
+      let tournamentNameParts = Object.keys(tournamentObj)[0].split("_");
+      let tournamentName = tournamentNameParts.slice(0,2).join("_");
+      let tournamentDay = tournamentNameParts.slice(2)[0];
+      if (!tournaments[tournamentName]) {
+        tournaments[tournamentName] = {}
+      }
+      tournaments[tournamentName][tournamentDay] = Object.values(tournamentObj)[0];
+
+      // track the tournamnet metadata for this wrestler
+      let winner: boolean = Object.values(tournamentObj)[0].winner === wrestlerName; 
+      let opponent: string = "";
+      let opponentRank: string = "";
+      let tournamentRank: string = "";
+      let technique: string = Object.values(tournamentObj)[0].technique;
+      
+      if (winner) {
+        tournamentRank = Object.values(tournamentObj)[0].winnerRank;
+        opponent = Object.values(tournamentObj)[0].loser;
+        opponentRank = Object.values(tournamentObj)[0].loserRank;
+      } else {
+        tournamentRank = Object.values(tournamentObj)[0].loserRank;
+        opponent = Object.values(tournamentObj)[0].winner;
+        opponentRank = Object.values(tournamentObj)[0].winnerRank;
+      }
+
+      if (!tournamentsMetadata[tournamentName]) {
+        tournamentsMetadata[tournamentName] = { 
+          name: tournamentName,
+          tournamentRank: tournamentRank,
+          wins: 0, 
+          losses: 0 
+        };
+      }
+
+      if (winner) {
+        tournamentsMetadata[tournamentName].wins += 1;
+      } else {
+        tournamentsMetadata[tournamentName].losses += 1;
+      }
+
+      // initialize matchup for this opponent 
+      if (!matchups[opponent]) {
+        matchups[opponent] = {
+          results: [{
+            tournament: tournamentName,
+            day: tournamentDay,
+            result: winner ? "Won" : "Lost",
+            opponent: opponent,
+            opponentRank: opponentRank,
+            technique: technique
+          }],
+          totalWins: winner ? 1 : 0,
+          totalLosses: !winner ? 1 : 0
+        }
+      } else { // add to matchups for this opponent
+        matchups[opponent].totalWins = winner ? matchups[opponent].totalWins + 1 : matchups[opponent].totalWins; 
+        matchups[opponent].totalLosses = !winner ? matchups[opponent].totalLosses + 1 : matchups[opponent].totalLosses; 
+        matchups[opponent].results = matchups[opponent].results.concat({
+          tournament: tournamentName,
+          day: tournamentDay,
+          result: winner ? "Won" : "Lost",
+          opponent: opponent,
+          opponentRank: opponentRank,
+          technique: Object.values(tournamentObj)[0].technique
+        });
+      }
+
+      // tracking moves won/lost by
+      if (!techniques[technique]) {
+        techniques[technique] = {
+          winsBy: winner ? 1 : 0,
+          lossesBy: !winner ? 1 : 0
+        };
+      } else {
+        techniques[technique].winsBy += winner ? 1 : 0;
+        techniques[technique].lossesBy += !winner ? 1 : 0;
+      }
+    });
+
+    return {
+      tournaments,
+      tournamentsMetadata,
+      matchups,
+      techniques
+    };
+  }
+
   // assertNever(x: string): void {
   //   throw new Error("Invalid Page: " + x);
   // }
@@ -336,6 +438,7 @@ class App extends Component {
           <WrestlerList 
             wrestlers={this.state.wrestlers} 
             goToWrestlerDetailPage={this.goToWrestlerDetailPage.bind(this)}
+            formData={this.formData.bind(this)}
           />
         );
         break;

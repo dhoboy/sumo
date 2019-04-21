@@ -38,12 +38,18 @@ const TournamentResultCard: React.FunctionComponent<Props> = ({
         wins={wins}
         losses={losses}
       />
-      <TrendLine 
-        tournamentData={tournamentData} 
-        wrestlerName={wrestlerName}
-        tournamentMetadata={tournamentMetadata}
-        pageLocation={'resultCard'}
-      />
+      <div className="trendLineContainer">
+        <div className="trendLineKeys">
+          <div className="trendLineKey">win</div>
+          <div className="trendLineKey">loss</div>
+        </div>
+        <TrendLine 
+          tournamentData={tournamentData} 
+          wrestlerName={wrestlerName}
+          tournamentMetadata={tournamentMetadata}
+          pageLocation={'resultCard'}
+        />
+      </div>
       <div className="tournamentDayResults">
         {Object.keys(tournamentData).map(day => {
           let dayData = tournamentData[day];
