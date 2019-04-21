@@ -20,18 +20,9 @@ interface Props {
 }
 
 /* ADD */
-// line graph of every match by wrestler in top header beside name
-
 // filter by sumo rank on list page
-
 // have the graph lines highlight the day entrys on hover
-
-// 2 columns. one is double wide of tournmanet results
-// other column is how you match up against everybody else all time
-
-// who they loose to or who they beat a lot, 
-// or what rank they loose to a lot stuff like that
-
+// what rank they loose to a lot
 // color code rank from the pyramid of rank on nhk sumo site
 
 class WrestlerDetail extends React.Component<Props, object> {
