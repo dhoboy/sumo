@@ -25,7 +25,7 @@ const headerStyle = {
   "fontWeight": 700,
   "cursor": "pointer",
   "text-align": "center",
-  "border-bottom": "2px solid #e40000"
+  "borderBottom": "2px solid #e40000"
 };
 
 export default Header;

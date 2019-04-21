@@ -121,9 +121,24 @@ class App extends Component {
   
   componentDidMount() {
     this.loadSumoData();
+    window.onpopstate = (e) => {  
+      let parts: string | string[] = window.location.href.split("#")[1];
+      parts = parts.split("/");
+      // go to a valid wrestler detail page
+      if (parts[0] === "wrestler" && Object.keys(this.state.wrestlers).indexOf(parts[1].toUpperCase()) > -1) {
+        this.goToWrestlerDetailPage(parts[1].toUpperCase());
+      } else { // go back to wrestler list
+        this.goToWrestlerList();
+      }
+    };
   }
 
   goToWrestlerDetailPage(wrestlerName: string) {
+    history.pushState({
+      "page": "wrestlerDetail",
+      "wrestlerDetail": wrestlerName,
+    }, "", `#wrestler/${wrestlerName.toLowerCase()}`);
+    
     this.setState({
       wrestlerDetailPage: wrestlerName,
       page: "wrestlerDetail"
@@ -131,8 +146,14 @@ class App extends Component {
   }
 
   goToWrestlerList() {
+    history.pushState({ 
+      "page": "wrestlerList",
+      "wrestlerDetailPage": "" 
+    }, "", `#wrestlerList/`);
+    
     this.setState({
-      page: "wrestlerList"
+      page: "wrestlerList",
+      wrestlerDetailPage: ""
     });
   }
 

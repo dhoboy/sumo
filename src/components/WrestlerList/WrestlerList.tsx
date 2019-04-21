@@ -133,17 +133,21 @@ class WrestlerList extends React.Component<Props, object> {
     if (wrestlersList.length === 0) {
       return (
         <div style={styles.wrestlerList}>
-          <input 
-            type="text"
-            style={styles.filterInput}
-            onChange={(e) => {
-              this.setState({
-                text: e.target.value
-              });
-            }}
-            value={this.state.filterText}
-          />
-          <div>No Wrestlers Match Your Search Term!</div>
+          <div style={styles.inputArea}>
+            <div>Filter by Wrestler Name</div>
+            <input 
+              type="text"
+              style={styles.filterInput}
+              onChange={(e) => {
+                console.log("onchange!");
+                this.setState({
+                  filterText: e.target.value
+                });
+              }}
+              value={this.state.filterText}
+            />
+            <div>No Wrestlers Match Your Search Term!</div>
+          </div>
         </div>
       );
     }
@@ -156,6 +160,7 @@ class WrestlerList extends React.Component<Props, object> {
             type="text"
             style={styles.filterInput}
             onChange={(e) => {
+              console.log("onchange!");
               this.setState({
                 filterText: e.target.value
               });
@@ -212,9 +217,9 @@ class WrestlerList extends React.Component<Props, object> {
               break;
           }
           return sortResult;
-        }).map((wrestlerName, i, arr) => {
+        }).map(wrestlerName => {
           const wrestlerObj = wrestlers[wrestlerName];
-          const wrestlerData = wrestlers[wrestlerName];
+
           let {
             tournaments,
             tournamentsMetadata,
@@ -249,12 +254,13 @@ class WrestlerList extends React.Component<Props, object> {
           );
 
           return (
-            <div onClick={() => { this.props.goToWrestlerDetailPage(wrestlerName); }} 
+            <div key={wrestlerName}
+              onClick={() => { this.props.goToWrestlerDetailPage(wrestlerName); }} 
               style={styles.wrestlerRow}>
               <img style={styles.wrestlerPhoto} src={`https://www3.nhk.or.jp${wrestlerObj.image}`} />
               <div style={{ "textAlign": "left" }}> 
                 <div style={styles.wrestlerName}>{wrestlerName}</div>
-                <div style={styles.wrestlerJapaneseNameContainer}>
+                <div>
                   <img src={`https://www3.nhk.or.jp${wrestlerObj.name_ja}`} />
                 </div>
                 {rankDisplay}
@@ -299,7 +305,7 @@ const styles = {
   },
   filterInput: {
     "border": "2px solid #ccc",
-    "border-radius": "4px",
+    "borderRadius": "4px",
     "padding": "5px",
     "fontSize": "16px",
     "margin": "5px 0 10px 0",
@@ -312,8 +318,8 @@ const styles = {
     "marginBottom": "25px"
   },
   sortSelect: {
-    "border-radius": "10px",
-    "font-size": "14px",
+    "borderRadius": "10px",
+    "fontSize": "14px",
     "border": "2px solid #ccc",
     "background-color": "#fff"
   },
@@ -326,7 +332,7 @@ const styles = {
   wrestlerList: {
     "display": "flex",
     "flex-direction": "column",
-    "align-items": "center",
+    "alignItems": "center",
     "marginTop": "15px"
   },
   wrestlerRow: {
@@ -336,12 +342,6 @@ const styles = {
     "alignItems": "center",
     "marginBottom": "10px",
     "cursor": "pointer"
-  },
-  wrestlerJapaneseNameContainer: {
-   
-  },
-  wrestlerStats: {
-    
   },
   wrestlerPhoto: {
     "marginRight": "20px",
