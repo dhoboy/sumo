@@ -1,4 +1,4 @@
-.topTechniquesSection {
+.topOpponentsSection {
   display: flex;
 }
 
@@ -10,20 +10,11 @@
   margin-right: 20px;
 }
 
-.totalWins, .totalLosses {
-  font-weight: 700;
-  font-size: 20px;
-}
-
-.totalWinsLabel, .totalLossesLabel {
-  margin-right: 5px;
-}
-
-.topTechniques {
+.topOpponents {
   margin-top: 10px;
 }
 
-.topTechnique {
+.topOpponent {
   margin: 5px;
   display: flex;
   flex-direction: row;
@@ -31,7 +22,7 @@
   font-size: 14px;
 }
 
-.topWinningTechniquesTitle, .topLoosingTechniquesTitle {
+.topWinningOpponentsTitle, .topLoosingOpponentsTitle {
   font-size: 18px;
   border-bottom: 2px solid #000;
   letter-spacing: 1.5px;

@@ -5,13 +5,15 @@
 .wrestlerDetailHeaderInfo {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .wrestlerDetailHeaderGraphs {
   display: flex;
   flex-direction: row;
   margin-top: 15px;
+  height: 90px;
+  overflow-y: scroll;
 }
 
 .wrestlerDetailHeaderGraphAndLabel {

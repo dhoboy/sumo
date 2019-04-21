@@ -4,10 +4,12 @@ import {
   wrestlerBaseInfo, 
   techniques,
   tournamentMap,
-  tournamentMetadataMap
+  tournamentMetadataMap,
+  matchups
 } from '../../../types/types';
 
 import TopTechniques from '../../TopTechniques/TopTechniques';
+import TopOpponents from '../../TopOpponents/TopOpponents';
 import TrendLine from '../../TrendLine/TrendLine';
 
 interface Props {
@@ -16,6 +18,7 @@ interface Props {
   techniques: techniques;
   tournaments: tournamentMap;
   tournamentsMetadata: tournamentMetadataMap;
+  matchups: matchups
 }
 
 class WrestlerDetailHeader extends React.Component<Props, object> {
@@ -25,24 +28,36 @@ class WrestlerDetailHeader extends React.Component<Props, object> {
       wrestlerData,
       techniques,
       tournaments,
-      tournamentsMetadata
+      tournamentsMetadata,
+      matchups
     } = this.props;
     
+    let rankDisplay = `Rank: ${wrestlerData.currentRank.rank}`;
+    if (wrestlerData.currentRank.rank.toLowerCase() !== 'yokozuna') {
+      rankDisplay += ` (${wrestlerData.currentRank.asOf.toLocaleDateString('en-US', {month: "long", year: "numeric"})})`;
+    }
+
     return (
       <div id="wrestlerDetailHeader">
         <div className="wrestlerDetailHeaderInfo">
           <div className="wrestlerNameAndPhoto">
             <img className="wrestlerPhoto" src={`https://www3.nhk.or.jp${wrestlerData.image}`} />
             <div className="wrestlerEnglishName">{wrestlerName}</div>
+            <div>{rankDisplay}</div>
             <div className="wrestlerJapaneseName">
               <div className="wrestlerJapaneseNameImgContainer"
                 style={{ "backgroundImage": `url(https://www3.nhk.or.jp${wrestlerData.name_ja})` }}>
-            </div>
-          </div>          
-        </div>
-          <TopTechniques
-            techniques={techniques}
-          />
+              </div>
+            </div>          
+          </div>
+          <div>
+            <TopTechniques
+              techniques={techniques}
+            />
+            <TopOpponents
+              matchups={matchups}
+            />
+          </div>
         </div>
         <div className="wrestlerDetailHeaderGraphs">
           {Object.keys(tournaments).sort((a, b) => {

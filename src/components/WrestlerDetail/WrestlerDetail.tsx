@@ -37,7 +37,8 @@ interface Props {
 class WrestlerDetail extends React.Component<Props, object> {
   drawDetailHeader(techniques: techniques, 
       tournaments: tournamentMap, 
-      tournamentsMetadata: tournamentMetadataMap) {
+      tournamentsMetadata: tournamentMetadataMap,
+      matchups: matchups) {
     
     let {
       wrestlerName,
@@ -53,6 +54,7 @@ class WrestlerDetail extends React.Component<Props, object> {
         wrestlerData={wrestlerData}
         tournaments={tournaments}
         tournamentsMetadata={tournamentsMetadata}
+        matchups={matchups}
       />
     );
   }
@@ -231,10 +233,22 @@ class WrestlerDetail extends React.Component<Props, object> {
     
     return (
       <div id={`${wrestlerName}`} className="wrestlerDetailPage">
-        {this.drawDetailHeader(techniques, tournaments, tournamentsMetadata)}
+        {this.drawDetailHeader(
+          techniques, 
+          tournaments, 
+          tournamentsMetadata,
+          matchups
+        )}
         <div className="wrestlerDetailBody">
-          {this.drawTournamentStats(wrestlerName, tournaments, tournamentsMetadata)}
-          {this.drawMatchupStats(wrestlerName, matchups)}
+          {this.drawTournamentStats(
+            wrestlerName, 
+            tournaments, 
+            tournamentsMetadata
+          )}
+          {this.drawMatchupStats(
+            wrestlerName, 
+            matchups
+          )}
         </div>
       </div>
     );
