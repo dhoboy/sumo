@@ -26,6 +26,10 @@ interface Props {
 // color code rank from the pyramid of rank on nhk sumo site
 
 class WrestlerDetail extends React.Component<Props, object> {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+  
   drawDetailHeader(techniques: techniques, 
       tournaments: tournamentMap, 
       tournamentsMetadata: tournamentMetadataMap,
