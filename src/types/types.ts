@@ -11,13 +11,13 @@ export interface rawWrestlerObj {
 };
 
 export interface rawTournamentMap {
-  [key: string]: { // july_2018_day1, ...
-    data: {
+  [key: string]: { // july_2018, ...
+    [key: string]: { // day1, ...
       east: rawWrestlerObj,
       technique: string,
       west: rawWrestlerObj
     }[]
-  };
+  }[];
 };
 
 // formed data
