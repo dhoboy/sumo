@@ -26,11 +26,8 @@ interface Props {
 }
 
 /* ADD */
-// search box at top to filter down result set
-
 // maybe main page has more sumo info
 // like rank definitions, terms, tournament schedule and the like
-// splashy styles too. some line graphs and splashy styles.
 
 class WrestlerList extends React.Component<Props, object> {
   state = {

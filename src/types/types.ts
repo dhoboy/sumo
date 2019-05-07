@@ -1,5 +1,3 @@
-import { number } from "prop-types";
-
 // raw data
 export interface rawWrestlerObj {
   image: string,

@@ -12,6 +12,7 @@ import {
 import WrestlerDetailHeader from './subcomponents/WrestlerDetailHeader';
 import TournamentResultCard from '../TournamentResultCard/TournamentResultCard';
 import WrestlerMatchups from '../WrestlerMatchups/WrestlerMatchups';
+
 import './WrestlerDetail.css';
 
 interface Props {

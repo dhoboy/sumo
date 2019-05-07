@@ -5,17 +5,17 @@ interface Props {
   goToWrestlerList: () => void
 }
 
-class Header extends Component<Props, object> {
-  render() {
-    return (
-      <div 
-        onClick={this.props.goToWrestlerList} 
-        style={headerStyle}
-      >
-        Grand Sumo
-      </div>
-    );
-  }
+const Header: React.FunctionComponent<Props> = ({
+  goToWrestlerList
+}) => {
+  return (
+    <div 
+      onClick={goToWrestlerList} 
+      style={headerStyle}
+    >
+      Grand Sumo
+    </div>
+  );
 }
 
 const headerStyle = {

@@ -21,75 +21,71 @@ interface Props {
   matchups: matchups
 }
 
-class WrestlerDetailHeader extends React.Component<Props, object> {
-  render() {
-    const {
-      wrestlerName,
-      wrestlerData,
-      techniques,
-      tournaments,
-      tournamentsMetadata,
-      matchups
-    } = this.props;
-    
-    let rankDisplay = `Rank: ${wrestlerData.currentRank.rank}`;
-    if (wrestlerData.currentRank.rank.toLowerCase() !== 'yokozuna') {
-      rankDisplay += ` (${wrestlerData.currentRank.asOf.toLocaleDateString('en-US', {month: "long", year: "numeric"})})`;
-    }
-
-    return (
-      <div id="wrestlerDetailHeader">
-        <div className="wrestlerDetailHeaderInfo">
-          <div className="wrestlerNameAndPhoto">
-            <img className="wrestlerPhoto" src={`https://www3.nhk.or.jp${wrestlerData.image}`} />
-            <div className="wrestlerEnglishName">{wrestlerName}</div>
-            <div>{rankDisplay}</div>
-            <div className="wrestlerJapaneseName">
-              <div className="wrestlerJapaneseNameImgContainer"
-                style={{ "backgroundImage": `url(https://www3.nhk.or.jp${wrestlerData.name_ja})` }}>
-              </div>
-            </div>          
-          </div>
-          <div>
-            <TopTechniques
-              techniques={techniques}
-            />
-            <TopOpponents
-              matchups={matchups}
-            />
-          </div>
-        </div>
-        <div className="wrestlerDetailHeaderGraphs">
-          {Object.keys(tournaments).sort((a, b) => {
-            let aDate = new Date(a.split("_").join(" "));
-            let bDate = new Date(b.split("_").join(" "));
-            return Number(aDate) - Number(bDate);
-          }).map(tournament => {
-            let tournamentData = tournaments[tournament];
-            let tournamentMetadata = tournamentsMetadata[tournament];
-            let tournamentDisplayNameParts = tournamentMetadata.name.split("_");
-            let tournamentDisplayName = tournamentDisplayNameParts[0].charAt(0).toUpperCase() + 
-              tournamentDisplayNameParts[0].slice(1) + " " +
-              tournamentDisplayNameParts[1];
-            
-            return (
-              <div className="wrestlerDetailHeaderGraphAndLabel">
-                <TrendLine
-                  tournamentData={tournamentData} 
-                  wrestlerName={wrestlerName}
-                  tournamentMetadata={tournamentMetadata}
-                  pageLocation={"header"}
-                />
-                <div className="wrestlerDetailHeaderGraphLabel">
-                  {tournamentDisplayName}
-                </div>
-              </div>
-            );
-          })}
-        </div>        
-      </div>
-    );
+const WrestlerDetailHeader: React.FunctionComponent<Props> = ({
+  wrestlerName,
+  wrestlerData,
+  techniques,
+  tournaments,
+  tournamentsMetadata,
+  matchups
+}) => {
+  let rankDisplay = `Rank: ${wrestlerData.currentRank.rank}`;
+  if (wrestlerData.currentRank.rank.toLowerCase() !== 'yokozuna') {
+    rankDisplay += ` (${wrestlerData.currentRank.asOf.toLocaleDateString('en-US', {month: "long", year: "numeric"})})`;
   }
+
+  return (
+    <div id="wrestlerDetailHeader">
+      <div className="wrestlerDetailHeaderInfo">
+        <div className="wrestlerNameAndPhoto">
+          <img className="wrestlerPhoto" src={`https://www3.nhk.or.jp${wrestlerData.image}`} />
+          <div className="wrestlerEnglishName">{wrestlerName}</div>
+          <div>{rankDisplay}</div>
+          <div className="wrestlerJapaneseName">
+            <div className="wrestlerJapaneseNameImgContainer"
+              style={{ "backgroundImage": `url(https://www3.nhk.or.jp${wrestlerData.name_ja})` }}>
+            </div>
+          </div>          
+        </div>
+        <div>
+          <TopTechniques
+            techniques={techniques}
+          />
+          <TopOpponents
+            matchups={matchups}
+          />
+        </div>
+      </div>
+      <div className="wrestlerDetailHeaderGraphs">
+        {Object.keys(tournaments).sort((a, b) => {
+          let aDate = new Date(a.split("_").join(" "));
+          let bDate = new Date(b.split("_").join(" "));
+          return Number(aDate) - Number(bDate);
+        }).map(tournament => {
+          let tournamentData = tournaments[tournament];
+          let tournamentMetadata = tournamentsMetadata[tournament];
+          let tournamentDisplayNameParts = tournamentMetadata.name.split("_");
+          let tournamentDisplayName = tournamentDisplayNameParts[0].charAt(0).toUpperCase() + 
+            tournamentDisplayNameParts[0].slice(1) + " " +
+            tournamentDisplayNameParts[1];
+          
+          return (
+            <div className="wrestlerDetailHeaderGraphAndLabel">
+              <TrendLine
+                tournamentData={tournamentData} 
+                wrestlerName={wrestlerName}
+                tournamentMetadata={tournamentMetadata}
+                pageLocation={"header"}
+              />
+              <div className="wrestlerDetailHeaderGraphLabel">
+                {tournamentDisplayName}
+              </div>
+            </div>
+          );
+        })}
+      </div>        
+    </div>
+  );
 }
 
 export default WrestlerDetailHeader;
