@@ -13,6 +13,7 @@ import {
 } from '../../types/types';
 
 import TrendLine from '../TrendLine/TrendLine';
+import PunchCard from '../PunchCard/PunchCard';
 
 interface Props {
   wrestlers: wrestlerMap,
@@ -274,6 +275,9 @@ class WrestlerList extends React.Component<Props, object> {
                     tournamentMetadata={tournamentMetadata}
                     pageLocation={Math.random().toString(36).slice(2)}
                   />
+                  <PunchCard
+                    baba={"adsfsad"}
+                  />
                 </div>
                 <div style={styles.graphDateLabel}>
                   {tournamentDisplayName}
@@ -287,11 +291,12 @@ class WrestlerList extends React.Component<Props, object> {
   }
 
   render() {
-    return (
+    return (<div>wrestler list re-write!</div>)
+    /*return (
       <div>
         {this.drawWrestlersList()}
       </div>
-    );
+    );*/
   }
 }
 

@@ -7,6 +7,7 @@ import {
 
 import TournamentResultCardHeader from './subcomponents/TournamentResultCardHeader';
 import TrendLine from '../TrendLine/TrendLine';
+import PunchCard from '../PunchCard/PunchCard';
 import DayResultRow from './subcomponents/DayResultRow';
 
 import './TournamentResultCard.css'
