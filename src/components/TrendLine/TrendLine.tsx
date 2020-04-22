@@ -12,7 +12,7 @@ interface Props {
     [key: string]: match
   };
   wrestlerName: string;
-  tournamentMetadata: {
+  tournamentSummaryData: {
     wins: number;
     losses: number;
     name: string;
@@ -23,13 +23,13 @@ interface Props {
 class TrendLine extends React.Component<Props, object> {
   componentDidMount() {
     const { 
-      tournamentData,
       wrestlerName,
-      tournamentMetadata,
-      pageLocation
+      tournamentData,
+      tournamentSummaryData,
+      pageLocation,
     } = this.props;
 
-    let g = d3.select(`.${tournamentMetadata.name}-${pageLocation}`)
+    let g = d3.select(`.${tournamentSummaryData.name}-${pageLocation}`)
       .append("g")
       .attr("transform", `translate(${10}, ${10})`);
 
@@ -76,13 +76,13 @@ class TrendLine extends React.Component<Props, object> {
   render() {
     const { 
       tournamentData,
-      tournamentMetadata,
+      tournamentSummaryData,
       pageLocation
     } = this.props;
 
     return (
       <div>
-        <svg className={`${tournamentMetadata.name}-${pageLocation}`}
+        <svg className={`${tournamentSummaryData.name}-${pageLocation}`}
           height="50" width="150">
         </svg>
       </div>

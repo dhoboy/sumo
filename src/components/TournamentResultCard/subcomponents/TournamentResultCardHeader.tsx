@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 
 import { 
-  tournamentMetadata
+  tournamentSummaryData
 } from '../../../types/types';
 
 interface Props {
   tournamentDisplayName: string;
-  tournamentMetadata: tournamentMetadata;
+  tournamentSummaryData: tournamentSummaryData;
   tournamentType: string;
   wins: number;
   losses: number;
@@ -14,7 +14,7 @@ interface Props {
 
 const TournamentResultCardHeader: React.FunctionComponent<Props> = ({
   tournamentDisplayName,
-  tournamentMetadata,
+  tournamentSummaryData,
   tournamentType,
   wins,
   losses
@@ -22,7 +22,7 @@ const TournamentResultCardHeader: React.FunctionComponent<Props> = ({
   return (
     <Fragment>
       <div className={`tournamentTitle`}>
-        {`${tournamentDisplayName}: ${tournamentMetadata.tournamentRank}`}
+        {`${tournamentDisplayName}: ${tournamentSummaryData.tournamentRank}`}
       </div>
       <div className={tournamentType}>
         {tournamentType}

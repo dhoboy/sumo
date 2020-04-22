@@ -4,7 +4,7 @@ import {
   wrestlerBaseInfo, 
   techniques,
   tournamentMap,
-  tournamentMetadataMap,
+  tournamentSummaryDataMap,
   matchups
 } from '../../../types/types';
 
@@ -17,7 +17,7 @@ interface Props {
   wrestlerData: wrestlerBaseInfo;
   techniques: techniques;
   tournaments: tournamentMap;
-  tournamentsMetadata: tournamentMetadataMap;
+  tournamentsSummaryData: tournamentSummaryDataMap;
   matchups: matchups
 }
 
@@ -26,7 +26,7 @@ const WrestlerDetailHeader: React.FunctionComponent<Props> = ({
   wrestlerData,
   techniques,
   tournaments,
-  tournamentsMetadata,
+  tournamentsSummaryData,
   matchups
 }) => {
   let rankDisplay = `Rank: ${wrestlerData.currentRank.rank}`;
@@ -63,8 +63,8 @@ const WrestlerDetailHeader: React.FunctionComponent<Props> = ({
           return Number(aDate) - Number(bDate);
         }).map(tournament => {
           let tournamentData = tournaments[tournament];
-          let tournamentMetadata = tournamentsMetadata[tournament];
-          let tournamentDisplayNameParts = tournamentMetadata.name.split("_");
+          let tournamentSummaryData = tournamentsSummaryData[tournament];
+          let tournamentDisplayNameParts = tournamentSummaryData.name.split("_");
           let tournamentDisplayName = tournamentDisplayNameParts[0].charAt(0).toUpperCase() + 
             tournamentDisplayNameParts[0].slice(1) + " " +
             tournamentDisplayNameParts[1];
@@ -74,7 +74,7 @@ const WrestlerDetailHeader: React.FunctionComponent<Props> = ({
               <TrendLine
                 tournamentData={tournamentData} 
                 wrestlerName={wrestlerName}
-                tournamentMetadata={tournamentMetadata}
+                tournamentSummaryData={tournamentSummaryData}
                 pageLocation={"header"}
               />
               <div className="wrestlerDetailHeaderGraphLabel">

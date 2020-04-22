@@ -7,10 +7,8 @@ interface Props {
 
 class PunchCard extends React.Component<Props, object> {
   render() {
-    console.log("baba");
     return (
-      <div className="PUNCHCARD">
-        bbabab
+      <div className="punchcard">
       </div>
     );
   }

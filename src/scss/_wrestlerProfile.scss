@@ -1,0 +1,19 @@
+.wrestler-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  .wrestler-name {
+    font-size: 18px;
+  }
+
+  .rank-display span {
+    display: block;
+  }
+
+  img.photo {
+    margin-right: 20px;
+    border: 2px solid #000;
+    border-radius: 90px;
+  }
+}

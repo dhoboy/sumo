@@ -8,8 +8,8 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 
 import ui from "./reducers/ui";
-import match from "./reducers/match";
-import wrestler from "./reducers/wrestler";
+import data from "./reducers/data";
+import wrestlerList from "./reducers/wrestlerList";
 
 let middleware = [thunk];
 
@@ -20,8 +20,8 @@ if (process.env.NODE_ENV === "development") {
 const store = createStore(
   combineReducers({
     ui,
-    match,
-    wrestler,
+    data,
+    wrestlerList,
   }),
   applyMiddleware(...middleware)
 );

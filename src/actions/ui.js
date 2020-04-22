@@ -1,0 +1,1 @@
+export const this_can_compile_now = "true";

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { 
   matchResults,
-  tournamentMetadata
+  tournamentSummaryData,
 } from '../../types/types';
 
 import TournamentResultCardHeader from './subcomponents/TournamentResultCardHeader';
@@ -15,7 +15,7 @@ import './TournamentResultCard.css'
 interface Props {
   wrestlerName: string;
   tournamentData: matchResults;
-  tournamentMetadata: tournamentMetadata;
+  tournamentSummaryData: tournamentSummaryData;
   wins: number;
   losses: number;
   tournamentDisplayName: string;
@@ -25,7 +25,7 @@ interface Props {
 const TournamentResultCard: React.FunctionComponent<Props> = ({
   wrestlerName,
   tournamentData,
-  tournamentMetadata,
+  tournamentSummaryData,
   wins,
   losses,
   tournamentDisplayName,
@@ -35,7 +35,7 @@ const TournamentResultCard: React.FunctionComponent<Props> = ({
     <div className="tournamentSection">
       <TournamentResultCardHeader
         tournamentDisplayName={tournamentDisplayName}
-        tournamentMetadata={tournamentMetadata}
+        tournamentSummaryData={tournamentSummaryData}
         tournamentType={tournamentType}
         wins={wins}
         losses={losses}
@@ -48,7 +48,7 @@ const TournamentResultCard: React.FunctionComponent<Props> = ({
         <TrendLine 
           tournamentData={tournamentData} 
           wrestlerName={wrestlerName}
-          tournamentMetadata={tournamentMetadata}
+          tournamentSummaryData={tournamentSummaryData}
           pageLocation={'resultCard'}
         />
       </div>

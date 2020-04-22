@@ -5,7 +5,7 @@ import {
   matchResults,
   tournamentMap,
   matchups,
-  tournamentMetadataMap,
+  tournamentSummaryDataMap,
   techniques
 } from '../../types/types';
 
@@ -33,7 +33,7 @@ class WrestlerDetail extends React.Component<Props, object> {
   
   drawDetailHeader(techniques: techniques, 
       tournaments: tournamentMap, 
-      tournamentsMetadata: tournamentMetadataMap,
+      tournamentsSummaryData: tournamentSummaryDataMap,
       matchups: matchups) {
     
     let {
@@ -49,7 +49,7 @@ class WrestlerDetail extends React.Component<Props, object> {
         wrestlerName={wrestlerName}
         wrestlerData={wrestlerData}
         tournaments={tournaments}
-        tournamentsMetadata={tournamentsMetadata}
+        tournamentsSummaryData={tournamentsSummaryData}
         matchups={matchups}
       />
     );
@@ -66,7 +66,7 @@ class WrestlerDetail extends React.Component<Props, object> {
 
   drawTournamentStats(wrestlerName: string, 
       tournaments: tournamentMap, 
-      tournamentsMetadata: tournamentMetadataMap) {
+      tournamentsSummaryData: tournamentSummaryDataMap) {
     
     return (
       <div className="tournamentResultsSection">
@@ -78,9 +78,9 @@ class WrestlerDetail extends React.Component<Props, object> {
             return Number(bDate) - Number(aDate);
           }).map(tournament => {
             let tournamentData = tournaments[tournament];
-            let tournamentMetadata = tournamentsMetadata[tournament];
-            let wins = tournamentMetadata.wins;
-            let losses = tournamentMetadata.losses;
+            let tournamentSummaryData = tournamentsSummaryData[tournament];
+            let wins = tournamentSummaryData.wins;
+            let losses = tournamentSummaryData.losses;
             let tournamentDisplayNameParts = tournament.split("_");
             let tournamentDisplayName = tournamentDisplayNameParts[0].charAt(0).toUpperCase() + 
               tournamentDisplayNameParts[0].slice(1) + " " +
@@ -98,7 +98,7 @@ class WrestlerDetail extends React.Component<Props, object> {
             return (
               <TournamentResultCard
                 tournamentData={tournamentData}
-                tournamentMetadata={tournamentMetadata}
+                tournamentSummaryData={tournamentSummaryData}
                 wins={wins}
                 losses={losses}
                 tournamentDisplayName={tournamentDisplayName}
@@ -122,7 +122,7 @@ class WrestlerDetail extends React.Component<Props, object> {
 
     // massage results into bins
     let tournaments: tournamentMap = {};
-    let tournamentsMetadata: tournamentMetadataMap = {};
+    let tournamentsSummaryData: tournamentSummaryDataMap = {};
     let matchups: matchups = {};
     let techniques: techniques = {};
 
@@ -135,7 +135,7 @@ class WrestlerDetail extends React.Component<Props, object> {
       }
       tournaments[tournamentName][tournamentDay] = Object.values(tournamentObj)[0];
 
-      // track the tournamnet metadata for this wrestler
+      // track the tournamnet summary data for this wrestler
       let winner: boolean = Object.values(tournamentObj)[0].winner === wrestlerName; 
       let opponent: string = "";
       let opponentRank: string = "";
@@ -152,8 +152,8 @@ class WrestlerDetail extends React.Component<Props, object> {
         opponentRank = Object.values(tournamentObj)[0].winnerRank;
       }
 
-      if (!tournamentsMetadata[tournamentName]) {
-        tournamentsMetadata[tournamentName] = { 
+      if (!tournamentsSummaryData[tournamentName]) {
+        tournamentsSummaryData[tournamentName] = { 
           name: tournamentName,
           tournamentRank: tournamentRank,
           wins: 0, 
@@ -162,9 +162,9 @@ class WrestlerDetail extends React.Component<Props, object> {
       }
 
       if (winner) {
-        tournamentsMetadata[tournamentName].wins += 1;
+        tournamentsSummaryData[tournamentName].wins += 1;
       } else {
-        tournamentsMetadata[tournamentName].losses += 1;
+        tournamentsSummaryData[tournamentName].losses += 1;
       }
 
       // initialize matchup for this opponent 
@@ -208,7 +208,7 @@ class WrestlerDetail extends React.Component<Props, object> {
 
     return {
       tournaments,
-      tournamentsMetadata,
+      tournamentsSummaryData,
       matchups,
       techniques
     };
@@ -222,7 +222,7 @@ class WrestlerDetail extends React.Component<Props, object> {
 
     const {
       tournaments,
-      tournamentsMetadata,
+      tournamentsSummaryData,
       matchups,
       techniques
     } = this.formData();
@@ -232,14 +232,14 @@ class WrestlerDetail extends React.Component<Props, object> {
         {this.drawDetailHeader(
           techniques, 
           tournaments, 
-          tournamentsMetadata,
+          tournamentsSummaryData,
           matchups
         )}
         <div className="wrestlerDetailBody">
           {this.drawTournamentStats(
             wrestlerName, 
             tournaments, 
-            tournamentsMetadata
+            tournamentsSummaryData
           )}
           {this.drawMatchupStats(
             wrestlerName, 

@@ -56,11 +56,11 @@ export interface tournamentMap {
   }
 }
 
-export interface tournamentMetadataMap {
-  [key: string]: tournamentMetadata // january_2019, ... : tournamentMetadata
+export interface tournamentSummaryDataMap {
+  [key: string]: tournamentSummaryData // january_2019, ... : tournamentSummaryData
 }
 
-export interface tournamentMetadata {
+export interface tournamentSummaryData {
   name: string;
   tournamentRank: string;
   wins: number;

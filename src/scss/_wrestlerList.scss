@@ -1,0 +1,58 @@
+.wrestler-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+
+  .list-filters {
+    width: 100%;
+    text-align: center;
+
+    input {
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      padding: 5px;
+      font-size: 16px;
+      margin: 5px 0 10px 0;
+      width: 70%;
+    }
+
+    label {
+      width: 30%;
+    }
+
+    label span {
+      display: block;
+      font-size: 12px;
+    }
+
+    label span.wrestler-name-filter {
+      font-size: 16px;
+    }
+
+    .sort-options {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    select {
+      border-radius: 10px;
+      font-size: 14px;
+      border: 2px solid #ccc;
+      background-color: #fff;
+    }
+  }
+
+  .list-contents {
+    .list-content-item {
+      display: flex;
+      flex-direction: row;
+      width: 60%;
+      align-items: center;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+  }
+}

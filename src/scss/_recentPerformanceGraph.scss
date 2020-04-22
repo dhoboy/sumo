@@ -1,0 +1,22 @@
+.recent-performance-graph {
+  text-align: center;
+
+  .graph-and-keys {
+    display: flex;
+    flex-direction: row;
+
+    .keys {
+      display: flex;
+      flex-direction: column; 
+      justify-content: space-around;
+
+      span {
+        font-size: 12px;
+      }
+    }
+
+    .date-label {
+      font-size: 12px;
+    }
+  }
+}

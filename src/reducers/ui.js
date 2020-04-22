@@ -1,11 +1,19 @@
 const initialState = {
   page: '/',
+  loading: true,
 };
 
 const ui = (state = initialState, action) => {
-  switch(action) {
+  const { type, payload } = action;
+  
+  switch (type) {
+    case "LOADING_COMPLETE": 
+      return {
+        ...state,
+        loading: false,
+      };
     default:
-      return initialState;
+      return state;
   };
 };
 
