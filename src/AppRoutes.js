@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 import WrestlerList from './components/WrestlerList/WrestlerList';
-import WrestlerDetailNew from './components/WrestlerDetail/WrestlerDetailNew';
+import WrestlerDetail from './components/WrestlerDetail/WrestlerDetail';
 
 const AppRoutes = () => {
   return (
@@ -14,7 +13,7 @@ const AppRoutes = () => {
       />
       <Route
         path="/wrestler/:name"
-        render={routeProps => <WrestlerDetailNew {...routeProps} />}
+        render={routeProps => <WrestlerDetail {...routeProps} />}
       />
       <Route 
         path="/wrestler-list"
@@ -24,4 +23,4 @@ const AppRoutes = () => {
   )
 }
 
-export default connect()(AppRoutes);
+export default AppRoutes;

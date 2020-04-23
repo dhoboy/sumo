@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { loadWrestlerListPage } from '../../actions/wrestlerList';
 
-const Header = () => { 
+const PageHeader = () => { 
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -10,10 +10,10 @@ const Header = () => { 
   };
 
   return (
-    <div className="header" onClick={handleClick}>
+    <div className="page-header" onClick={handleClick}>
       Grand Sumo
     </div>
   );
 }
 
-export default Header;
+export default PageHeader;

@@ -1,6 +1,10 @@
 import React from 'react';
 import TrendLine from '../TrendLine/TrendLine';
 
+// component doesn't reason about
+// which tournamet is most recent
+// it just graphs whatever tournament
+// is passed to it
 const RecentPerformanceGraph = ({
   wrestlerName,
   tournamentData,

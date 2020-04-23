@@ -1,23 +1,16 @@
 import React from 'react';
-import { match } from '../../../types/types';
 
-interface Props {
-  day: string;
-  winner: boolean;
-  dayData: match;
-}
-
-const DayResultRow: React.FunctionComponent<Props> = ({
+const CardRow = ({
   day,
   winner,
-  dayData
+  dayData,
 }) => {
   return (
-    <div className="dayResultRow">
-      <div className="dayName">
+    <div className="day-result-row">
+      <div className="day-name">
         {`${day.charAt(0).toUpperCase() + day.slice(1)}: `}
       </div>
-      <div className="matchResult">
+      <div className="match-result">
         {winner ? 
           `Defeated ${dayData.loser} by ${dayData.technique}` : 
           `Lost to ${dayData.winner} by ${dayData.technique}`
@@ -27,4 +20,4 @@ const DayResultRow: React.FunctionComponent<Props> = ({
   );
 }
 
-export default DayResultRow;
+export default CardRow;

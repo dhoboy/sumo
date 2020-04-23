@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { loadWrestlerDetailPage } from '../../actions/wrestlerDetail';
-import WrestlerProfile from '../shared/WrestlerProfile';
+import FullWrestlerProfile from '../WrestlerProfile/FullWrestlerProfile';
 import RecentPerformanceGraph from '../shared/RecentPerformanceGraph';
 
 const ListContentItem = ({
@@ -28,7 +28,7 @@ const ListContentItem = ({
   
   return (
     <div className="list-content-item" key={name} onClick={handleClick}>
-      <WrestlerProfile wrestlerName={name} />
+      <FullWrestlerProfile wrestlerName={name} />
       <RecentPerformanceGraph 
         wrestlerName={name}
         tournamentData={tournamentData}

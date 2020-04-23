@@ -10,8 +10,16 @@ html {
   font-size: 14px;
   background-color: #fff;
 
-  @import './header';
-  @import './wrestlerList';
-  @import './recentPerformanceGraph';
-  @import './wrestlerProfile';
+  #sumo-app {
+    margin: 30px auto 0;
+    max-width: 800px;
+
+    @import './pageHeader';
+    @import './wrestlerList';
+    @import './recentPerformanceGraph';
+    @import './wrestlerProfile';
+    @import './wrestlerDetail';
+    @import './tournamentResults';
+
+  }
 }

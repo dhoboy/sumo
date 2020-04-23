@@ -4,7 +4,7 @@ import { Router } from 'react-router-dom';
 import history from './history';
 import AppRoutes from './AppRoutes';
 import { init } from './actions/data';
-import Header from './components/Header/Header';
+import PageHeader from './components/PageHeader/PageHeader';
 
 class App extends Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class App extends Component {
       <Provider store={this.props.store}>
         <Router history={history}>
           <div id="sumo-app">
-            <Header />
+            <PageHeader />
             <main className="app-content">
               <AppRoutes />
             </main>

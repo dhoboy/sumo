@@ -1,33 +1,21 @@
 import React, { Fragment } from 'react';
 
-import { 
-  tournamentSummaryData
-} from '../../../types/types';
-
-interface Props {
-  tournamentDisplayName: string;
-  tournamentSummaryData: tournamentSummaryData;
-  tournamentType: string;
-  wins: number;
-  losses: number;
-}
-
-const TournamentResultCardHeader: React.FunctionComponent<Props> = ({
+const CardHeader = ({
   tournamentDisplayName,
   tournamentSummaryData,
   tournamentType,
   wins,
-  losses
+  losses,
 }) => { 
   return (
     <Fragment>
-      <div className={`tournamentTitle`}>
+      <div className={`tournament-title`}>
         {`${tournamentDisplayName}: ${tournamentSummaryData.tournamentRank}`}
       </div>
       <div className={tournamentType}>
         {tournamentType}
       </div>
-      <div className={`winsLosses ${tournamentType}-tournament`}>
+      <div className={`wins-losses ${tournamentType}-tournament`}>
         <div className="wins">
           {`${wins} ${wins === 1 ? 'win' : 'wins'}`}
         </div>
@@ -40,4 +28,4 @@ const TournamentResultCardHeader: React.FunctionComponent<Props> = ({
   );
 };
 
-export default TournamentResultCardHeader;
+export default CardHeader;

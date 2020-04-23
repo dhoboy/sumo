@@ -1,0 +1,29 @@
+.wrestler-detail-header {
+  .header-overview {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .header-graphs {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    height: 90px;
+    overflow-y: scroll;
+  }
+
+  .graph-and-label {
+    text-align: center;
+  }
+
+  .graph-label {
+    font-size: 12px;
+  }
+}
+
+.wrestler-detail-body {
+  display: flex;
+  margin: 30px;
+  text-align: center;
+}

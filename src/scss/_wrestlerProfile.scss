@@ -1,19 +1,40 @@
-.wrestler-profile {
+.full-wrestler-profile, .short-wrestler-profile {
   display: flex;
-  flex-direction: row;
   align-items: center;
   
-  .wrestler-name {
-    font-size: 18px;
-  }
-
   .rank-display span {
     display: block;
   }
 
   img.photo {
-    margin-right: 20px;
     border: 2px solid #000;
     border-radius: 90px;
+  }
+}
+
+.full-wrestler-profile {
+  flex-direction: row;
+
+  .wrestler-name {
+    font-size: 18px;
+  }
+
+  img.photo {
+    margin-right: 20px;
+  }
+}
+
+.short-wrestler-profile {
+  width: 200px;
+  text-align: center;
+  flex-direction: column;
+
+  .wrestler-name {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .rank-display {
+    font-size: 16px;
   }
 }
