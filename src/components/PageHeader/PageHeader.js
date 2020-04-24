@@ -1,17 +1,18 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { loadWrestlerListPage } from '../../actions/wrestlerList';
+import { NavLink } from "react-router-dom";
 
 const PageHeader = () => { 
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    dispatch(loadWrestlerListPage());
-  };
-
   return (
-    <div className="page-header" onClick={handleClick}>
-      Grand Sumo
+    <div className="page-header">
+      <span className="logo">Grand Sumo</span>
+      <div className="nav-links">
+        <NavLink to={'/wrestler-list'}>
+          <span>All Wrestlers</span>
+        </NavLink>
+        <NavLink to="/insights">
+          <span>Insights</span>
+        </NavLink>
+      </div>
     </div>
   );
 }

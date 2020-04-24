@@ -15,7 +15,7 @@ const ListContentItem = ({
     dispatch(loadWrestlerDetailPage(name));
   };
 
-  let mostRecentTournament = Object.keys(tournament).sort((a, b) => {
+  let mostRecentTournament = Object.keys(tournament || []).sort((a, b) => {
     let aDate = new Date(a.split("_").join(" "));
     let bDate = new Date(b.split("_").join(" "));
     return Number(bDate) - Number(aDate);

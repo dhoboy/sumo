@@ -35,7 +35,10 @@ const ListContents = () => {
   return (
     <div className="list-contents">
       {wrestlerList.map(wrestler => {
-        return <ListContentItem {...wrestler} />;
+        // dealing with race conditions... will deal with later, good enough for now
+        if (wrestler.tournament) {
+          return <ListContentItem {...wrestler} />;
+        }
       })}
     </div>
   );

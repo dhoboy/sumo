@@ -166,8 +166,9 @@ const buildAllMatchData = () => {
     wrestlerNames.forEach((wrestlerName, i) => {
       if (i === wrestlerNames.length - 1) {
         dispatch(buildMatchData(wrestlerName, true));
+      } else {
+        dispatch(buildMatchData(wrestlerName));
       }
-      dispatch(buildMatchData(wrestlerName));
     })
   }
 };
