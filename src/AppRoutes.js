@@ -3,6 +3,8 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import WrestlerList from './components/WrestlerList/WrestlerList';
 import WrestlerDetail from './components/WrestlerDetail/WrestlerDetail';
 import Insights from './components/Insights/Insights';
+import Overview from './components/Overview/Overview';
+import Tournaments from './components/Tournaments/Tournaments';
 
 const AppRoutes = () => {
   return (
@@ -19,6 +21,14 @@ const AppRoutes = () => {
       <Route 
         path="/wrestler-list"
         render={routeProps => <WrestlerList {...routeProps} />}
+      />
+      <Route
+        path="/overview"
+        render={routeProps => <Overview {...routeProps} />}
+      />
+      <Route
+        path="/tournaments"
+        render={routeProps => <Tournaments {...routeProps} />}
       />
       <Route 
         path="/insights"

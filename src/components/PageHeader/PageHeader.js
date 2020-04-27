@@ -6,8 +6,14 @@ const PageHeader = () => { 
     <div className="page-header">
       <span className="logo">Grand Sumo</span>
       <div className="nav-links">
+        <NavLink to={'/overview'}>
+          <span>Overview</span>
+        </NavLink>        
         <NavLink to={'/wrestler-list'}>
-          <span>All Wrestlers</span>
+          <span>Wrestlers</span>
+        </NavLink>
+        <NavLink to={'/tournaments'}>
+          <span>Tournaments</span>
         </NavLink>
         <NavLink to="/insights">
           <span>Insights</span>

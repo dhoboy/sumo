@@ -1,5 +1,5 @@
 import React from 'react';
-import TrendLine from '../TrendLine/TrendLine';
+import PunchCard from '../PunchCard/PunchCard';
 
 // component doesn't reason about
 // which tournamet is most recent
@@ -13,22 +13,25 @@ const RecentPerformanceGraph = ({
 }) => {
   return (
     <div className="recent-performance-graph">
+      <div className="date-label">
+        {tournamentDisplayName}
+      </div>
       <div className="graph-and-keys">
         <div className="keys">
           <span>win</span>
           <span>loss</span>
         </div>
-        <TrendLine
+        <PunchCard
           wrestlerName={wrestlerName}
           tournamentData={tournamentData} 
           tournamentSummaryData={tournamentSummaryData}
-          pageLocation={Math.random().toString(36).slice(2)}
         />
       </div>
-      <div className="date-label">
-        {tournamentDisplayName}
+        
+        <div className="title">
+        Daily Match Record
       </div>
-    </div>
+      </div>
   );
 }
 

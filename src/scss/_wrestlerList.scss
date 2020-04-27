@@ -1,7 +1,6 @@
 .wrestler-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-top: 15px;
 
   .list-filters {
@@ -47,12 +46,13 @@
 
   .list-contents {
     .list-content-item {
+      height: 167px;
       display: flex;
       flex-direction: row;
-      width: 60%;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
       cursor: pointer;
+      justify-content: center;
     }
   }
 }

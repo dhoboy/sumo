@@ -15,7 +15,7 @@ const FullWrestlerProfile = ({ wrestlerName }) => {
   return (
     <div className={`full-wrestler-profile ${name}`}>
       <img className="photo" src={`https://www3.nhk.or.jp${image}`} />
-      <div> 
+      <div className="name-and-rank"> 
         <span className="wrestler-name">{name}</span>
         <img className="name-ja" src={`https://www3.nhk.or.jp${name_ja}`} />
         <RankDisplay {...currentRank} />
