@@ -11,24 +11,20 @@ const RecentPerformanceGraph = ({
   tournamentSummaryData,
   tournamentDisplayName,
 }) => {
+  const tournamentResult = tournamentSummaryData.result.charAt(0).toUpperCase().concat(tournamentSummaryData.result.slice(1));
   return (
     <div className="recent-performance-graph">
       <div className="date-label">
-        {tournamentDisplayName}
+        {`${tournamentDisplayName}: ${tournamentResult}`}
       </div>
       <div className="graph-and-keys">
-        <div className="keys">
-          <span>win</span>
-          <span>loss</span>
-        </div>
         <PunchCard
           wrestlerName={wrestlerName}
           tournamentData={tournamentData} 
           tournamentSummaryData={tournamentSummaryData}
         />
       </div>
-        
-        <div className="title">
+      <div className="title">
         Daily Match Record
       </div>
       </div>

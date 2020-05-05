@@ -1,7 +1,7 @@
 import React from 'react';
 import CardHeader from './CardHeader';
-import TrendLine from '../TrendLine/TrendLine';
 import CardRow from './CardRow';
+import PunchCard from '../PunchCard/PunchCard';
 
 const ResultCard = ({
   wrestlerName,
@@ -11,9 +11,9 @@ const ResultCard = ({
   losses,
   tournamentDisplayName,
   tournamentType,
-}) => {
+}) => {  
   return (
-    <div className="tournament-section">
+    <div id={`tournament-${tournamentSummaryData.name}`} className={`tournament-section ${tournamentSummaryData.name}`}>
       <CardHeader
         tournamentDisplayName={tournamentDisplayName}
         tournamentSummaryData={tournamentSummaryData}
@@ -22,13 +22,9 @@ const ResultCard = ({
         losses={losses}
       />
       <div className="trend-line-container">
-        <div className="trend-line-keys">
-          <div className="trend-line-key">win</div>
-          <div className="trend-line-key">loss</div>
-        </div>
-        <TrendLine 
-          tournamentData={tournamentData} 
+        <PunchCard
           wrestlerName={wrestlerName}
+          tournamentData={tournamentData} 
           tournamentSummaryData={tournamentSummaryData}
           pageLocation={'resultCard'}
         />
@@ -42,6 +38,7 @@ const ResultCard = ({
               day={day}  
               dayData={dayData}
               winner={winner}
+              tournamentSummaryData={tournamentSummaryData}
             />
           );
         })}

@@ -10,6 +10,7 @@ import logger from "redux-logger";
 import ui from "./reducers/ui";
 import data from "./reducers/data";
 import wrestlerList from "./reducers/wrestlerList";
+import wrestlerDetail from "./reducers/wrestlerDetail";
 
 let middleware = [thunk];
 
@@ -22,6 +23,7 @@ const store = createStore(
     ui,
     data,
     wrestlerList,
+    wrestlerDetail,
   }),
   applyMiddleware(...middleware)
 );

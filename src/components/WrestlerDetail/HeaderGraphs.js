@@ -1,5 +1,5 @@
 import React from 'react';
-import TrendLine from '../TrendLine/TrendLine';
+import PunchCard from '../PunchCard/PunchCard';
 
 const HeaderGraphs = ({ 
   wrestlerName,
@@ -11,7 +11,7 @@ const HeaderGraphs = ({
       {Object.keys(tournament).sort((a, b) => {
         let aDate = new Date(a.split("_").join(" "));
         let bDate = new Date(b.split("_").join(" "));
-        return Number(aDate) - Number(bDate);
+        return Number(bDate) - Number(aDate);
       }).map(tournamentName => {
         let tournamentData = tournament[tournamentName];
         let tournamentSummaryData = tournamentSummary[tournamentName];
@@ -20,11 +20,11 @@ const HeaderGraphs = ({
         
         return (
           <div className="graph-and-label">
-            <TrendLine
-              tournamentData={tournamentData} 
+            <PunchCard
               wrestlerName={wrestlerName}
+              tournamentData={tournamentData} 
               tournamentSummaryData={tournamentSummaryData}
-              pageLocation={"header"}
+              pageLocation={'header-graphs'}
             />
             <div className="graph-label">
               {tournamentDisplayName}

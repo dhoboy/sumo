@@ -11,7 +11,7 @@ class App extends Component {
     this.props.dispatch(init());
   }
 
-  render() {    
+  render() {
     return (
       <Provider store={this.props.store}>
         <Router history={history}>
@@ -20,6 +20,7 @@ class App extends Component {
             <main className="app-content">
               <AppRoutes />
             </main>
+            <div id="tooltip"></div>
           </div>
         </Router>
       </Provider>

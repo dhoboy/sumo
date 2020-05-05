@@ -219,7 +219,7 @@ const buildMatchData = (wrestlerName, lastWrestler) => {
           name: tournamentName,
           tournamentRank: tournamentRank,
           wins: 0, 
-          losses: 0 
+          losses: 0,
         };
       }
 
@@ -228,6 +228,11 @@ const buildMatchData = (wrestlerName, lastWrestler) => {
       } else {
         tournamentsMetadata[tournamentName].losses += 1;
       }
+
+      // re-calculate if this was a winning tournament or losing tournament
+      const { wins, losses} = tournamentsMetadata[tournamentName];
+      tournamentsMetadata[tournamentName].result = wins > losses ? "kachikoshi" : "machikoshi";
+      
 
       // initialize matchup for this opponent 
       if (!matchups[opponent]) {
